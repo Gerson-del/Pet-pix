@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPix</title>
+    <title>PetPix</title> 
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
+    <h1 id="title">With Pet Pix, we'll find your perfect pet</h1> 
     <div id="contenedor">
-        <button class="nav-button" id="prev">&#9664;</button>  
-        <img src="assets/pet-images/whiskers.jpeg" alt="Esta es la imagen del conejo whiskers">
-        <button class="nav-button" id="next">&#9654;</button>  
+        <button class="nav-button" id="prev" onclick="prevImage()">&#9664;</button>  
+        <div id="image-container">
+            <img id="pet-image" src="" alt="Pet image" />
+        </div>
+        <button class="nav-button" id="next" onclick="nextImage()">&#9654;</button>  
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
-
