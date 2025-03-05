@@ -43,7 +43,7 @@ function updatePetInfo() {
     petImage.src = pets[currentIndex].image;
     petName.textContent = pets[currentIndex].name;
     petDescription.textContent = pets[currentIndex].description;
-    petAge.textContent = pets[currentIndex].age;
+    petAge.textContent = "edad : " + pets[currentIndex].age;
 }
 
 
