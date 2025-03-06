@@ -43,7 +43,7 @@ function updatePetInfo() {
     petImage.src = pets[currentIndex].image;
     petName.textContent = pets[currentIndex].name;
     petDescription.textContent = pets[currentIndex].description;
-    petAge.textContent = "edad : " + pets[currentIndex].age;
+    petAge.textContent = pets[currentIndex].age + " años";
 }
 
 
@@ -55,11 +55,11 @@ function nextImage() {
 
 
 // funcion que muestra la imagen previa
-function prevImage() {
+function prevImage(){
     currentIndex = (currentIndex - 1 + pets.length) % pets.length;
-     updateImage();
-     updatePetInfo();
+    updatePetInfo();
 }
+
 
 
 window.onload = updatePetInfo;
