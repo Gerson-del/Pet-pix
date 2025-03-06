@@ -33,18 +33,29 @@ const pets = [
 
 let currentIndex = 0;
 
-// actualiza la imagen
 function updatePetInfo() {
     const petImage = document.getElementById("pet-image");
     const petAge = document.getElementById("pet-age");
     const petName = document.getElementById("pet-name");
     const petDescription = document.getElementById("pet-description");
 
-    petImage.src = pets[currentIndex].image;
-    petName.textContent = pets[currentIndex].name;
-    petDescription.textContent = pets[currentIndex].description;
-    petAge.textContent = pets[currentIndex].age + " años";
+    // Agrega la clase fade-out antes de cambiar la imagen
+    petImage.classList.add("fade-out");
+
+    setTimeout(() => {
+        petImage.src = pets[currentIndex].image;
+        petName.textContent = pets[currentIndex].name;
+        petDescription.textContent = pets[currentIndex].description;
+        petAge.textContent = pets[currentIndex].age + " años";
+
+        // Una vez cambiada la imagen, activa la clase fade-in
+        petImage.classList.remove("fade-out");
+ 
+    }, 300); // Tiempo suficiente para la transición
 }
+
+
+
 
 
 // Esta funcion muestra la imagen siguiente 
