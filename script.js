@@ -42,6 +42,7 @@ function updatePetInfo() {
     // Agrega la clase fade-out antes de cambiar la imagen
     petImage.classList.add("fade-out");
 
+
     setTimeout(() => {
         petImage.src = pets[currentIndex].image;
         petName.textContent = pets[currentIndex].name;
@@ -72,5 +73,89 @@ function prevImage(){
 }
 
 
-
+// cargamos la imagen al inicio
 window.onload = updatePetInfo;
+
+
+// Todo esto es para darle funcionalidad al boton de favoritos
+
+//ARREGLAR ESTO
+
+// Función para agregar a favoritos
+function toggleFavorite() {
+    const pet = {
+        name: document.getElementById("pet-name").textContent,
+        image: document.getElementById("pet-image").src,
+        description: document.getElementById("pet-description").textContent,
+        age: document.getElementById("pet-age").textContent
+    };
+
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    const isAlreadyFavorite = favorites.some(fav => fav.name === pet.name);
+
+    if (isAlreadyFavorite) {
+        alert("¡Esta mascota ya está en tus favoritos!");
+        console.log("favorites : " + favorites);
+    } else {
+        favorites.push(pet);
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+        alert("¡Mascota añadida a tus favoritos!");
+        
+    }
+
+}
+
+
+document.addEventListener("DOMContentLoaded",function() {
+    const favorites = JSON.parse(localStorage.getItem("favorites") || []);
+    const favoritesSection  = document.getElementById("favorites-section");
+
+    if (favorites.length > 0){
+        favorites.forEach(pet => {
+            const petDiv = document.createElement("div");
+            petDiv.classList.add("favorite-pet");
+            
+            petDiv.innerHTML = `
+                <img src="${pet.image}" alt="Pet image">
+                <h3>${pet.name}</h3>
+                <p>${pet.age}</p>
+                <button onclick="removeFavorite('${pet.name}')">Eliminar</button>
+            `;
+            favoritesSection.appendChild(petDiv);
+        });
+    }
+})
+
+function removeFavorite(petName) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    favorites = favorites.filter(fav  => fav.name !== petName);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+
+    document.getElementById("favorites-section").innerHTML = '';
+    displayFavorites();
+}
+
+
+function displayFavorites() {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const favoritesSection = document.getElementById("favorites-section");
+
+    favorites.forEach(pet => {
+        const petDiv = document.createElement("div");
+        petDiv.classList.add("favorite-pet");
+
+        petDiv.innerHTML = `
+            <img src="${pet.image}" alt="Pet image">
+            <h3>${pet.name}</h3>
+            <p>${pet.age}</p>
+            <button onclick="removeFavorite('${pet.name}')">Eliminar</button>
+        `;
+        favoritesSection.appendChild(petDiv);
+    });
+}
+
+
+
+// Inicializa la página mostrando la primera mascota
+updatePetInfo();
